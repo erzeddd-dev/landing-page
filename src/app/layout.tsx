@@ -14,20 +14,20 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Jasa Olah Data Penelitian Premium",
-  description: "Terkendala Olah Data Penelitian? Biar kami yang urus datanya. Layanan premium olah data SPSS, EViews, Ekonometrika, Penyusunan Makalah, dan Parafrase.",
+  title: "Jasa Olah Data Penelitian",
+  description: "Terkendala Olah Data Penelitian? Biar kami yang urus datanya. Layanan olah data SPSS, EViews, Ekonometrika, Penyusunan Makalah, dan Parafrase.",
   openGraph: {
-    title: "Jasa Olah Data Penelitian Premium",
-    description: "Terkendala Olah Data Penelitian? Biar kami yang urus datanya. Layanan premium olah data SPSS, EViews, Ekonometrika, Penyusunan Makalah, dan Parafrase.",
-    url: "https://jasadata.com",
-    siteName: "Jasa Olah Data Premium",
+    title: "Jasa Olah Data Penelitian",
+    description: "Terkendala Olah Data Penelitian? Biar kami yang urus datanya. Layanan olah data SPSS, EViews, Ekonometrika, Penyusunan Makalah, dan Parafrase.",
+    url: "https://olahdata.me",
+    siteName: "Jasa Olah Data",
     locale: "id_ID",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Jasa Olah Data Penelitian Premium",
-    description: "Layanan premium olah data SPSS, EViews, Ekonometrika, Penyusunan Makalah, dan Parafrase.",
+    title: "Jasa Olah Data Penelitian",
+    description: "Layanan olah data SPSS, EViews, Ekonometrika, Penyusunan Makalah, dan Parafrase.",
   },
 };
 
