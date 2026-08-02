@@ -21,14 +21,23 @@ export const metadata: Metadata = {
     title: "Jasa Olah Data Penelitian",
     description: "Terkendala Olah Data Penelitian? Biar kami yang urus datanya. Layanan olah data SPSS, EViews, Ekonometrika, Penyusunan Makalah, dan Parafrase.",
     url: "https://olahdata.me",
-    siteName: "Jasa Olah Data",
+    siteName: "Uji Data",
     locale: "id_ID",
     type: "website",
+    images: [
+      {
+        url: "https://olahdata.me/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Uji Data - Jasa Olah Data Penelitian",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Jasa Olah Data Penelitian",
     description: "Layanan olah data SPSS, EViews, Ekonometrika, Penyusunan Makalah, dan Parafrase.",
+    images: ["https://olahdata.me/og-image.png"],
   },
 };
 
