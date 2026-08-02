@@ -14,6 +14,7 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://olahdata.me"),
   title: "Jasa Olah Data Penelitian",
   description: "Terkendala Olah Data Penelitian? Biar kami yang urus datanya. Layanan olah data SPSS, EViews, Ekonometrika, Penyusunan Makalah, dan Parafrase.",
   openGraph: {
