@@ -10,7 +10,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative pt-32 pb-20 px-6 max-w-7xl mx-auto flex flex-col items-center text-center">
+    <section className="relative pt-32 pb-16 px-6 max-w-7xl mx-auto flex flex-col items-center text-center">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -51,12 +51,12 @@ export default function Hero() {
             <span>Konsultasi Gratis Sekarang</span>
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </a>
-          
+
           <a
             href="#layanan"
-            className="inline-flex items-center justify-center px-8 py-4 text-gray-300 hover:text-white transition-colors"
+            className="inline-flex items-center justify-center px-8 py-4 rounded-full border border-white/15 text-gray-200 hover:text-white hover:bg-white/5 transition-colors"
           >
-            Lihat Layanan Kami
+            Lihat Katalog Layanan
           </a>
         </motion.div>
       </motion.div>
