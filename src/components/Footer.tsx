@@ -57,7 +57,7 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold text-lg mb-4 text-white">Kontak</h4>
             <ul className="space-y-3">
-              <li className="text-gray-400">WhatsApp: <br/><span className="text-white">+62 812-3456-7890</span></li>
+              <li className="text-gray-400">WhatsApp: <br/><span className="text-white">+62 857-1307-1197</span></li>
               <li className="text-gray-400">Email: <br/><a href="mailto:info.mrazizi@gmail.com" className="text-white hover:text-brand-primary transition-colors">info.mrazizi@gmail.com</a></li>
               <li className="text-gray-400">Jam Operasional: <br/><span className="text-white">Senin - Minggu (08:00 - 22:00)</span></li>
             </ul>
