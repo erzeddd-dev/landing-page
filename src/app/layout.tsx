@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://olahdata.me/og-image.png?v=2",
+        url: "https://olahdata.me/og-image.png",
         width: 1200,
         height: 630,
         alt: "Uji Data - Jasa Olah Data Penelitian",
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Jasa Olah Data Penelitian",
     description: "Layanan olah data SPSS, EViews, Ekonometrika, Penyusunan Makalah, dan Parafrase.",
-    images: ["https://olahdata.me/og-image.png?v=2"],
+    images: ["https://olahdata.me/og-image.png"],
   },
 };
 
