@@ -9,6 +9,15 @@ export default function Hero() {
     return `https://wa.me/6285713071197?text=${text}`;
   };
 
+  const scrollToCatalog = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const el = document.getElementById("layanan");
+    if (!el) return;
+    const navOffset = 80;
+    const top = el.getBoundingClientRect().top + window.scrollY - navOffset;
+    window.scrollTo({ top, behavior: "smooth" });
+  };
+
   return (
     <section className="relative pt-32 pb-16 px-6 max-w-7xl mx-auto flex flex-col items-center text-center">
       <motion.div
@@ -54,6 +63,7 @@ export default function Hero() {
 
           <a
             href="#layanan"
+            onClick={scrollToCatalog}
             className="inline-flex items-center justify-center px-8 py-4 rounded-full border border-white/15 text-gray-200 hover:text-white hover:bg-white/5 transition-colors"
           >
             Lihat Katalog Layanan

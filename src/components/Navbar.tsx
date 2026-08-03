@@ -36,8 +36,28 @@ export default function Navbar() {
     };
   }, [isOpen]);
 
-  const handleNavClick = () => {
+  const scrollToSection = (href: string) => {
+    const id = href.replace("#", "");
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    // Account for fixed navbar height
+    const navOffset = 80;
+    const top = el.getBoundingClientRect().top + window.scrollY - navOffset;
+    window.scrollTo({ top, behavior: "smooth" });
+  };
+
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
+    e.preventDefault();
     setIsOpen(false);
+
+    // Wait until menu closes & body overflow is restored, then scroll
+    setTimeout(() => {
+      scrollToSection(href);
+    }, 150);
   };
 
   return (
@@ -52,7 +72,7 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        <Link href="/" onClick={handleNavClick}>
+        <Link href="/" onClick={() => setIsOpen(false)}>
           <div className="relative h-10 w-48 sm:h-12 sm:w-56 cursor-pointer">
             <Image
               src="/logo.svg"
@@ -70,6 +90,7 @@ export default function Navbar() {
             <a
               key={link.href}
               href={link.href}
+              onClick={(e) => handleNavClick(e, link.href)}
               className="text-sm font-medium text-gray-300 hover:text-white transition-colors"
             >
               {link.label}
@@ -111,13 +132,10 @@ export default function Navbar() {
           >
             <nav className="flex flex-col px-6 py-4 gap-1">
               {NAV_LINKS.map((link, idx) => (
-                <motion.a
+                <a
                   key={link.href}
                   href={link.href}
-                  onClick={handleNavClick}
-                  initial={{ opacity: 0, y: -8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: idx * 0.05 }}
+                  onClick={(e) => handleNavClick(e, link.href)}
                   className={`py-3 px-4 rounded-xl text-base font-medium transition-colors ${
                     idx === 0
                       ? "text-white bg-white/10 border border-white/10"
@@ -125,21 +143,18 @@ export default function Navbar() {
                   }`}
                 >
                   {link.label}
-                </motion.a>
+                </a>
               ))}
 
-              <motion.a
+              <a
                 href="https://wa.me/6285713071197?text=Halo%20kak%2C%20saya%20mau%20konsultasi%20jasa%20olah%20data"
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={handleNavClick}
-                initial={{ opacity: 0, y: -8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.15 }}
+                onClick={() => setIsOpen(false)}
                 className="mt-3 py-3.5 px-4 rounded-full text-center text-sm font-semibold bg-white text-black hover:scale-[1.02] active:scale-95 transition-transform"
               >
                 Konsultasi WA
-              </motion.a>
+              </a>
             </nav>
           </motion.div>
         )}
