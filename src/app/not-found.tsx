@@ -3,7 +3,7 @@ import { ArrowLeft } from "lucide-react";
 
 export default function NotFound() {
   return (
-    <main className="min-h-screen bg-brand-dark flex flex-col items-center justify-center p-6 text-center">
+    <main className="min-h-screen bg-background flex flex-col items-center justify-center p-6 text-center">
       <h1 className="text-9xl font-bold text-white/10 mb-4">404</h1>
       <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
         Halaman Tidak Ditemukan

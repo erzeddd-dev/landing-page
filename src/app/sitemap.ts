@@ -3,19 +3,19 @@ import { MetadataRoute } from 'next';
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: 'https://jasadata.com',
+      url: 'https://olahdata.me',
       lastModified: new Date(),
       changeFrequency: 'yearly',
       priority: 1,
     },
     {
-      url: 'https://jasadata.com/privacy-policy',
+      url: 'https://olahdata.me/privacy-policy',
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
-      url: 'https://jasadata.com/terms-of-service',
+      url: 'https://olahdata.me/terms-of-service',
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,

@@ -9,7 +9,7 @@ export const metadata = {
 
 export default function PrivacyPolicy() {
   return (
-    <main className="min-h-screen bg-brand-dark overflow-hidden flex flex-col pt-28">
+    <main className="min-h-screen bg-background overflow-hidden flex flex-col pt-28">
       <div className="container mx-auto px-6 py-12 flex-grow max-w-4xl">
         <Link href="/" className="inline-flex items-center text-gray-400 hover:text-white mb-8 transition-colors">
           <ArrowLeft className="w-4 h-4 mr-2" />
