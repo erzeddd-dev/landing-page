@@ -18,17 +18,18 @@ export default function Home() {
       {/* Divider */}
       <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent my-12" />
 
+      {/* Harga dipindah setelah katalog agar alur baca: layanan → harga → sosial bukti */}
+      <PricingTier />
+
+      {/* Divider */}
+      <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent my-12" />
+
       <TrustBadges />
 
       {/* Divider */}
       <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent my-12" />
 
       <Testimonials />
-
-      {/* Divider */}
-      <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent my-12" />
-
-      <PricingTier />
 
       {/* Divider */}
       <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent my-12" />
