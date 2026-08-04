@@ -12,14 +12,14 @@ export default function Home() {
     <main className="relative min-h-screen overflow-x-hidden">
       <Hero />
 
-      {/* Katalog ditaruh langsung setelah Hero agar customer cepat menemukan layanan */}
-      <ServiceCatalog />
+      {/* Harga di atas katalog agar pengunjung langsung tahu range harga sebelum lihat detail layanan */}
+      <PricingTier />
 
       {/* Divider */}
       <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent my-12" />
 
-      {/* Harga dipindah setelah katalog agar alur baca: layanan → harga → sosial bukti */}
-      <PricingTier />
+      {/* Layanan Profesional Kami */}
+      <ServiceCatalog />
 
       {/* Divider */}
       <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent my-12" />
