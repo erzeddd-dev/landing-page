@@ -6,119 +6,89 @@ import { Check, Zap, Shield, Clock } from "lucide-react";
 
 const tiers = [
   {
-    name: "Paket Basic",
-    shortLabel: "Basic",
-    price: "250k",
+    name: "Paket Basic", shortLabel: "Basic", price: "250k",
     description: "Cocok untuk mahasiswa dengan waktu pengerjaan santai.",
     Icon: Clock,
     topBar: "from-indigo-400 to-cyan-400",
-    iconBg: "bg-indigo-500/20",
-    iconColor: "text-indigo-300",
-    checkBg: "bg-indigo-500/20",
-    checkColor: "text-indigo-300",
-    cardBg: "from-indigo-500/15 via-indigo-500/5 to-transparent",
-    border: "border-indigo-500/25",
+    iconBg: "bg-indigo-500/20", iconColor: "text-indigo-300",
+    checkBg: "bg-indigo-500/20", checkColor: "text-indigo-300",
+    cardBg: "from-indigo-900/60 via-indigo-900/30 to-slate-900/80",
+    border: "border-indigo-500/30",
     btnClass: "bg-indigo-500/20 border border-indigo-400/40 text-indigo-200 hover:bg-indigo-500/30",
-    features: [
-      "Pengerjaan 5-7 Hari Kerja",
-      "Olah Data Deskriptif",
-      "Uji Asumsi Klasik",
-      "Free Konsultasi 1x",
-    ],
+    features: ["Pengerjaan 5-7 Hari Kerja","Olah Data Deskriptif","Uji Asumsi Klasik","Free Konsultasi 1x"],
     buttonText: "Pilih Basic",
   },
   {
-    name: "Paket Ngebut",
-    shortLabel: "Ngebut",
-    price: "450k",
+    name: "Paket Ngebut", shortLabel: "Ngebut", price: "450k",
     description: "Solusi cepat untuk deadline yang sudah di depan mata.",
-    Icon: Zap,
-    badge: "Best Value",
+    Icon: Zap, badge: "Best Value",
     topBar: "from-brand-primary via-brand-secondary to-brand-accent",
-    iconBg: "bg-pink-500/20",
-    iconColor: "text-pink-300",
-    checkBg: "bg-pink-500/20",
-    checkColor: "text-pink-300",
-    cardBg: "from-pink-500/20 via-purple-500/10 to-transparent",
+    iconBg: "bg-pink-500/20", iconColor: "text-pink-300",
+    checkBg: "bg-pink-500/20", checkColor: "text-pink-300",
+    cardBg: "from-pink-900/60 via-purple-900/40 to-slate-900/80",
     border: "border-pink-500/40",
     btnClass: "bg-gradient-to-r from-brand-primary to-brand-secondary text-white shadow-[0_4px_24px_rgba(255,0,127,0.4)]",
-    features: [
-      "Pengerjaan 1-3 Hari Kerja",
-      "Semua Fitur Basic",
-      "Regresi & Uji Hipotesis",
-      "Free Revisi 2x",
-      "Prioritas Pengerjaan",
-    ],
+    features: ["Pengerjaan 1-3 Hari Kerja","Semua Fitur Basic","Regresi & Uji Hipotesis","Free Revisi 2x","Prioritas Pengerjaan"],
     buttonText: "Pilih Ngebut",
   },
   {
-    name: "Paket Lulus Aman",
-    shortLabel: "Lulus Aman",
-    price: "750k",
+    name: "Paket Lulus Aman", shortLabel: "Lulus Aman", price: "750k",
     description: "Pendampingan penuh sampai ACC dosen pembimbing.",
     Icon: Shield,
     topBar: "from-emerald-400 to-teal-400",
-    iconBg: "bg-emerald-500/20",
-    iconColor: "text-emerald-300",
-    checkBg: "bg-emerald-500/20",
-    checkColor: "text-emerald-300",
-    cardBg: "from-emerald-500/15 via-emerald-500/5 to-transparent",
-    border: "border-emerald-500/25",
+    iconBg: "bg-emerald-500/20", iconColor: "text-emerald-300",
+    checkBg: "bg-emerald-500/20", checkColor: "text-emerald-300",
+    cardBg: "from-emerald-900/60 via-teal-900/30 to-slate-900/80",
+    border: "border-emerald-500/30",
     btnClass: "bg-emerald-500/20 border border-emerald-400/40 text-emerald-200 hover:bg-emerald-500/30",
-    features: [
-      "Semua Fitur Ngebut",
-      "Pendampingan Sidang",
-      "Bantuan Parafrase (Max 20%)",
-      "Free Revisi Unlimited",
-      "Garansi Akurasi 100%",
-    ],
+    features: ["Semua Fitur Ngebut","Pendampingan Sidang","Bantuan Parafrase (Max 20%)","Free Revisi Unlimited","Garansi Akurasi 100%"],
     buttonText: "Pilih Lulus Aman",
   },
 ];
 
-const STACK = [
-  { scale: 1,    y: 0,  z: 30, opacity: 1,   blur: 0 },
-  { scale: 0.93, y: 18, z: 20, opacity: 0.55, blur: 1.5 },
-  { scale: 0.86, y: 36, z: 10, opacity: 0.28, blur: 3 },
-];
+// Fan positions: like holding cards in hand (spread left/right)
+const fan = (offset: number) => {
+  const s = Math.sign(offset);
+  const a = Math.abs(offset);
+  if (a === 0) return { x: 0,       rotate: 0,      scale: 1,    opacity: 1,    z: 30 };
+  if (a === 1) return { x: s * 190, rotate: s * 11, scale: 0.86, opacity: 0.62, z: 20 };
+  if (a === 2) return { x: s * 310, rotate: s * 20, scale: 0.74, opacity: 0.28, z: 10 };
+  return null;
+};
+
+const CARD_W = 300;
 
 export default function PricingTier() {
   const [active, setActive] = useState(1);
-  const touchX = useRef<number | null>(null);
-  const touchY = useRef<number | null>(null);
+  const tx = useRef<number | null>(null);
+  const ty = useRef<number | null>(null);
 
-  const goTo = useCallback(
-    (i: number) => { if (i >= 0 && i < tiers.length) setActive(i); },
-    []
-  );
+  const goTo = useCallback((i: number) => {
+    if (i >= 0 && i < tiers.length) setActive(i);
+  }, []);
 
   const onTouchStart = (e: React.TouchEvent) => {
-    touchX.current = e.touches[0].clientX;
-    touchY.current = e.touches[0].clientY;
+    tx.current = e.touches[0].clientX;
+    ty.current = e.touches[0].clientY;
   };
   const onTouchEnd = (e: React.TouchEvent) => {
-    if (touchX.current === null || touchY.current === null) return;
-    const dx = e.changedTouches[0].clientX - touchX.current;
-    const dy = e.changedTouches[0].clientY - touchY.current;
+    if (tx.current === null || ty.current === null) return;
+    const dx = e.changedTouches[0].clientX - tx.current;
+    const dy = e.changedTouches[0].clientY - ty.current;
     if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40)
       dx < 0 ? goTo(active + 1) : goTo(active - 1);
-    touchX.current = null;
-    touchY.current = null;
+    tx.current = null; ty.current = null;
   };
 
   const waLink = (name: string) =>
-    `https://wa.me/6285713071197?text=${encodeURIComponent(
-      `Halo kak, saya tertarik dengan ${name}. Boleh konsultasi detailnya?`
-    )}`;
+    `https://wa.me/6285713071197?text=${encodeURIComponent(`Halo kak, saya tertarik dengan ${name}. Boleh konsultasi detailnya?`)}`;
 
   return (
-    <section id="harga" className="py-24 px-6 max-w-md mx-auto">
+    <section id="harga" className="py-24 overflow-hidden">
       {/* Heading */}
-      <div className="text-center mb-12">
+      <div className="px-6 max-w-md mx-auto text-center mb-12">
         <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
           className="text-3xl md:text-5xl font-heading font-bold mb-4"
         >
           Investasi{" "}
@@ -128,17 +98,15 @@ export default function PricingTier() {
           Anda
         </motion.h2>
         <p className="text-text-muted text-sm leading-relaxed">
-          Pilih paket yang sesuai dengan kebutuhan dan deadline Anda.
-          Transparan, tanpa biaya tersembunyi.
+          Pilih paket yang sesuai dengan kebutuhan dan deadline Anda. Transparan, tanpa biaya tersembunyi.
         </p>
       </div>
 
-      {/* Tab Pills */}
-      <div className="flex items-center justify-center gap-2 mb-12 flex-wrap">
+      {/* Tab pills */}
+      <div className="flex items-center justify-center gap-2 mb-12 px-6 flex-wrap">
         {tiers.map((t, i) => (
           <button
-            key={i}
-            onClick={() => goTo(i)}
+            key={i} onClick={() => goTo(i)}
             className={`relative px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300 border ${
               i === active
                 ? t.badge
@@ -149,73 +117,69 @@ export default function PricingTier() {
           >
             {t.shortLabel}
             {t.badge && i !== active && (
-              <span className="absolute -top-1.5 -right-1.5 w-4 h-4 rounded-full bg-gradient-to-r from-brand-secondary to-brand-accent text-white text-[8px] font-bold flex items-center justify-center">
-                ★
-              </span>
+              <span className="absolute -top-1.5 -right-1.5 w-4 h-4 rounded-full bg-gradient-to-r from-brand-secondary to-brand-accent text-white text-[8px] font-bold flex items-center justify-center">★</span>
             )}
           </button>
         ))}
       </div>
 
-      {/* Stacked card deck */}
+      {/* Fan card deck — full width, cards centered via left:50% */}
       <div
-        className="relative"
-        style={{ height: 500 }}
+        className="relative w-full"
+        style={{ height: 510 }}
         onTouchStart={onTouchStart}
         onTouchEnd={onTouchEnd}
       >
         {tiers.map((tier, i) => {
-          const dist = Math.abs(i - active);
-          if (dist > 2) return null;
-          const s = STACK[dist];
-          const isActive = i === active;
+          const offset = i - active;
+          const f = fan(offset);
+          if (!f) return null;
+          const isActive = offset === 0;
           const TierIcon = tier.Icon;
 
           return (
             <motion.div
               key={tier.name}
-              animate={{ scale: s.scale, y: s.y, opacity: s.opacity, filter: `blur(${s.blur}px)` }}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              animate={{ x: f.x, rotate: f.rotate, scale: f.scale, opacity: f.opacity }}
+              transition={{ type: "spring", stiffness: 260, damping: 28 }}
               onClick={() => !isActive && goTo(i)}
-              className={`absolute inset-x-0 top-0 rounded-3xl border backdrop-blur-xl overflow-hidden bg-gradient-to-b ${tier.cardBg} ${tier.border} ${!isActive ? "cursor-pointer" : ""}`}
-              style={{ zIndex: s.z }}
+              className={`absolute top-0 rounded-3xl border backdrop-blur-xl overflow-hidden bg-gradient-to-b ${tier.cardBg} ${tier.border} ${!isActive ? "cursor-pointer" : ""}`}
+              style={{
+                width: CARD_W,
+                left: "50%",
+                marginLeft: -(CARD_W / 2),
+                zIndex: f.z,
+                transformOrigin: "50% 85%",
+              }}
             >
-              {/* Top color accent bar */}
+              {/* Top accent bar */}
               <div className={`h-1.5 w-full bg-gradient-to-r ${tier.topBar}`} />
 
               <div className="p-7">
-                {/* Header row */}
+                {/* Header */}
                 <div className="flex items-start justify-between mb-5">
-                  <div className="flex-1 min-w-0 pr-4">
+                  <div className="flex-1 min-w-0 pr-3">
                     {tier.badge && (
-                      <span className="inline-flex items-center gap-1 mb-2 px-3 py-0.5 bg-gradient-to-r from-brand-secondary to-brand-accent rounded-full text-[11px] font-bold text-white tracking-wide">
+                      <span className="inline-flex items-center gap-1 mb-2 px-3 py-0.5 bg-gradient-to-r from-brand-secondary to-brand-accent rounded-full text-[11px] font-bold text-white">
                         ★ {tier.badge}
                       </span>
                     )}
-                    <h3 className="text-lg font-heading font-bold text-white leading-tight">
-                      {tier.name}
-                    </h3>
-                    <p className="text-xs text-white/50 mt-1 leading-relaxed">
-                      {tier.description}
-                    </p>
+                    <h3 className="text-lg font-heading font-bold text-white leading-tight">{tier.name}</h3>
+                    <p className="text-xs text-white/50 mt-1 leading-relaxed">{tier.description}</p>
                   </div>
-                  <div className={`w-12 h-12 rounded-2xl ${tier.iconBg} flex items-center justify-center shrink-0`}>
-                    <TierIcon className={`w-6 h-6 ${tier.iconColor}`} />
+                  <div className={`w-11 h-11 rounded-2xl ${tier.iconBg} flex items-center justify-center shrink-0`}>
+                    <TierIcon className={`w-5 h-5 ${tier.iconColor}`} />
                   </div>
                 </div>
 
                 {/* Price */}
-                <div className="mb-6 pb-5 border-b border-white/10">
-                  <p className="text-[10px] text-white/40 uppercase tracking-widest font-semibold mb-0.5">
-                    Mulai dari
-                  </p>
-                  <p className="text-4xl font-extrabold text-white tracking-tight">
-                    Rp {tier.price}
-                  </p>
+                <div className="mb-5 pb-5 border-b border-white/10">
+                  <p className="text-[10px] text-white/40 uppercase tracking-widest font-semibold mb-0.5">Mulai dari</p>
+                  <p className="text-4xl font-extrabold text-white tracking-tight">Rp {tier.price}</p>
                 </div>
 
                 {/* Features */}
-                <ul className="space-y-3 mb-7">
+                <ul className="space-y-3 mb-6">
                   {tier.features.map((f, fi) => (
                     <li key={fi} className="flex items-center gap-3">
                       <div className={`w-5 h-5 rounded-full ${tier.checkBg} flex items-center justify-center shrink-0`}>
@@ -243,12 +207,10 @@ export default function PricingTier() {
       </div>
 
       {/* Dot indicators */}
-      <div className="flex justify-center gap-2 mt-5">
+      <div className="flex justify-center gap-2 mt-6">
         {tiers.map((_, i) => (
           <button
-            key={i}
-            onClick={() => goTo(i)}
-            aria-label={`Pilih ${tiers[i].shortLabel}`}
+            key={i} onClick={() => goTo(i)} aria-label={`Pilih ${tiers[i].shortLabel}`}
             className={`transition-all duration-300 rounded-full ${
               i === active
                 ? "w-8 h-2 bg-gradient-to-r from-brand-primary to-brand-secondary"
@@ -257,10 +219,7 @@ export default function PricingTier() {
           />
         ))}
       </div>
-
-      <p className="text-center text-white/30 text-xs mt-3">
-        Geser atau klik tab untuk berpindah paket
-      </p>
+      <p className="text-center text-white/30 text-xs mt-3">Geser atau klik tab untuk berpindah paket</p>
     </section>
   );
 }
