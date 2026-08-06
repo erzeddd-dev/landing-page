@@ -11,33 +11,12 @@ export default function Home() {
   return (
     <main className="relative min-h-screen overflow-x-hidden">
       <Hero />
-
-      {/* Harga di atas katalog agar pengunjung langsung tahu range harga sebelum lihat detail layanan */}
       <PricingTier />
-
-      {/* Divider */}
-      <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent my-12" />
-
-      {/* Layanan Profesional Kami */}
-      <ServiceCatalog />
-
-      {/* Divider */}
-      <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent my-12" />
-
       <TrustBadges />
-
-      {/* Divider */}
-      <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent my-12" />
-
+      <ServiceCatalog />
       <Testimonials />
-
-      {/* Divider */}
-      <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent my-12" />
-
       <FAQ />
-
       <SmartWhatsApp />
-
       <Footer />
     </main>
   );
