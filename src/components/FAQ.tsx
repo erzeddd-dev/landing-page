@@ -1,88 +1,96 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronDown } from "lucide-react";
 
 const FAQS = [
   {
-    question: 'Apakah kerahasiaan data saya terjamin?',
-    answer: 'Sangat terjamin. Kami memiliki kebijakan privasi ketat. Semua data penelitian, judul penelitian, dan identitas klien akan dihapus secara permanen setelah proyek selesai dan di-ACC.'
+    question: "Layanan ini mencakup apa saja?",
+    answer:
+      "Fokus: olah data kuantitatif & ekonometrika (SPSS, EViews, STATA, SmartPLS/SEM). Pendukung: parafrase, proofreading, dan naskah jurnal. Detail cakupan disepakati setelah brief (data, model, deadline).",
   },
   {
-    question: 'Berapa lama proses pengerjaannya?',
-    answer: 'Waktu pengerjaan standar adalah 3-7 hari kerja tergantung tingkat kesulitan. Kami juga menyediakan layanan paket "Ngebut" untuk pengerjaan 1-2 hari (dengan biaya tambahan).'
+    question: "Berapa lama pengerjaan?",
+    answer:
+      "Basic sekitar 5-7 hari kerja, Ngebut 1-3 hari kerja, tergantung antrean dan kompleksitas. Estimasi final dikonfirmasi sebelum mulai.",
   },
   {
-    question: 'Apakah ada garansi revisi jika disalahkan dosen?',
-    answer: 'Tentu! Kami memberikan garansi revisi gratis sampai di-ACC oleh dosen pembimbing Anda, selama revisi tidak menyimpang dari judul dan kesepakatan awal.'
+    question: "Bagaimana sistem revisi?",
+    answer:
+      "Revisi mengikuti paket dan brief awal. Perubahan besar di luar kesepakatan (ganti model total, dll.) dibahas sebagai penyesuaian ruang lingkup.",
   },
   {
-    question: 'Bagaimana sistem pembayarannya?',
-    answer: 'Pembayaran dilakukan secara bertahap. Anda cukup membayar DP sebesar 50% di awal sebagai tanda jadi, dan pelunasan dibayarkan setelah draft final selesai kami kerjakan.'
+    question: "Bagaimana pembayaran?",
+    answer:
+      "Umumnya DP di awal, pelunasan setelah draft sesuai brief. Rincian disampaikan di WhatsApp sebelum pengerjaan.",
   },
   {
-    question: 'Aplikasi olah data apa saja yang dikuasai?',
-    answer: 'Tim ahli kami menguasai berbagai aplikasi statistik dan ekonometrika seperti SPSS, EViews, PLS, SmartPLS, Amos, STATA, hingga R-Studio.'
-  }
+    question: "Apakah data saya aman?",
+    answer:
+      "Ya. File dan identitas dipakai hanya untuk proyek Anda. Tidak dibagikan ke pihak lain.",
+  },
+  {
+    question: "Siapa yang bertanggung jawab atas karya akhir?",
+    answer:
+      "Anda sebagai penulis/peneliti. Kami bantu analisis teknis dan perapihan naskah. Memahami dan mempertanggungjawabkan hasil di bimbingan/sidang tetap di sisi klien.",
+  },
 ];
 
 export default function FAQ() {
-  const [activeIndex, setActiveIndex] = useState<number | null>(0);
+  const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="py-24 relative">
-      <div className="container mx-auto px-6 max-w-4xl">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Pertanyaan Seputar <span className="text-brand-accent">Layanan Kami</span>
+    <section id="faq" className="py-16 px-6 pb-20">
+      <div className="max-w-2xl mx-auto">
+        <div className="text-center mb-10">
+          <h2 className="font-heading text-3xl md:text-4xl font-bold mb-3 tracking-tight">
+            FAQ
           </h2>
-          <p className="text-gray-400">
-            Temukan jawaban untuk pertanyaan yang paling sering ditanyakan oleh mahasiswa.
+          <p className="text-text-muted text-sm md:text-base">
+            Pertanyaan yang paling sering muncul.
           </p>
-        </motion.div>
+        </div>
 
-        <div className="space-y-4">
-          {FAQS.map((faq, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden backdrop-blur-sm"
-            >
-              <button
-                onClick={() => setActiveIndex(activeIndex === idx ? null : idx)}
-                className="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none"
+        <div className="space-y-2">
+          {FAQS.map((faq, idx) => {
+            const isOpen = open === idx;
+            return (
+              <div
+                key={faq.question}
+                className="ui-card overflow-hidden"
               >
-                <span className="font-medium text-lg pr-4">{faq.question}</span>
-                <ChevronDown 
-                  className={`w-5 h-5 text-brand-primary transition-transform duration-300 flex-shrink-0 ${activeIndex === idx ? 'rotate-180' : ''}`} 
-                />
-              </button>
-              
-              <AnimatePresence>
-                {activeIndex === idx && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <div className="px-6 pb-5 text-gray-400 leading-relaxed border-t border-white/5 pt-4 mt-1">
-                      {faq.answer}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
-          ))}
+                <button
+                  type="button"
+                  onClick={() => setOpen(isOpen ? null : idx)}
+                  className="w-full px-5 py-4 flex items-center justify-between gap-4 text-left"
+                >
+                  <span className="text-sm md:text-base font-medium text-white/90">
+                    {faq.question}
+                  </span>
+                  <ChevronDown
+                    className={`w-4 h-4 text-white/40 shrink-0 transition-transform duration-200 ${
+                      isOpen ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.22 }}
+                    >
+                      <p className="px-5 pb-4 text-sm text-text-muted leading-relaxed border-t border-white/[0.05] pt-3">
+                        {faq.answer}
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

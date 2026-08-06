@@ -1,79 +1,77 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+
+const TOOLS = ["SPSS", "EViews", "STATA", "SmartPLS"];
 
 export default function Hero() {
-  const getWhatsAppLink = () => {
-    const text = encodeURIComponent("Halo kak, saya tertarik dengan layanan olah data. Boleh konsultasi?");
+  const waLink = () => {
+    const text = encodeURIComponent(
+      "Halo, saya ingin konsultasi layanan olah data penelitian. Boleh dibantu?"
+    );
     return `https://wa.me/6285713071197?text=${text}`;
   };
 
-  const scrollToCatalog = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const scrollTo = (id: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    const el = document.getElementById("layanan");
+    const el = document.getElementById(id);
     if (!el) return;
-    const navOffset = 80;
-    const top = el.getBoundingClientRect().top + window.scrollY - navOffset;
+    const top = el.getBoundingClientRect().top + window.scrollY - 80;
     window.scrollTo({ top, behavior: "smooth" });
   };
 
   return (
-    <section className="relative pt-32 pb-16 px-6 max-w-7xl mx-auto flex flex-col items-center text-center">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, ease: "easeOut" }}
-        className="max-w-3xl"
-      >
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-glass border border-glass-border mb-8 shadow-[0_0_15px_rgba(138,43,226,0.3)] backdrop-blur-sm">
-          <Sparkles className="w-4 h-4 text-brand-secondary" />
-          <span className="text-sm font-medium tracking-wide text-gray-200">
-            Jasa Olah Data #1 Mahasiswa
-          </span>
-        </div>
-
-        <h1 className="text-5xl md:text-7xl font-heading font-bold tracking-tight mb-6 leading-[1.1]">
-          Terkendala Olah Data Penelitian? <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary via-brand-secondary to-brand-accent">
-            Biar Kami yang Urus Datanya.
-          </span>
-        </h1>
-
-        <p className="text-lg md:text-xl text-text-muted mb-10 max-w-2xl mx-auto leading-relaxed">
-          Tinggalkan stres analisis data. Kami bantu selesaikan olah data SPSS, EViews, Ekonometrika hingga penyusunan makalah dengan hasil akurat dan terpercaya.
-        </p>
-
+    <section className="relative pt-32 pb-16 px-6">
+      <div className="max-w-3xl mx-auto text-center">
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.3, duration: 0.5 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
         >
-          <a
-            href={getWhatsAppLink()}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group relative inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-black font-semibold rounded-full overflow-hidden transition-all hover:scale-105 active:scale-95"
-          >
-            <div className="absolute inset-0 bg-gradient-to-r from-brand-primary/10 to-brand-secondary/10 opacity-0 group-hover:opacity-100 transition-opacity" />
-            <span>Konsultasi Gratis Sekarang</span>
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </a>
+          <div className="inline-flex flex-wrap items-center justify-center gap-2 mb-8">
+            {TOOLS.map((t) => (
+              <span
+                key={t}
+                className="text-xs font-semibold tracking-wide px-3 py-1.5 rounded-full border border-white/10 bg-white/[0.04] text-white/70"
+              >
+                {t}
+              </span>
+            ))}
+          </div>
 
-          <a
-            href="#layanan"
-            onClick={scrollToCatalog}
-            className="inline-flex items-center justify-center px-8 py-4 rounded-full border border-white/15 text-gray-200 hover:text-white hover:bg-white/5 transition-colors"
-          >
-            Lihat Katalog Layanan
-          </a>
+          <h1 className="font-heading text-4xl sm:text-5xl md:text-[3.25rem] font-bold tracking-tight leading-[1.1] mb-5">
+            Jasa olah data{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary via-brand-secondary to-brand-accent">
+              kuantitatif &amp; ekonometrika
+            </span>
+          </h1>
+
+          <p className="text-text-muted text-base md:text-lg max-w-xl mx-auto mb-9 leading-relaxed">
+            SPSS, EViews, STATA, SmartPLS. Plus parafrase, proofreading, dan
+            naskah jurnal. Mulai dari Rp 250rb.
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-3 justify-center items-stretch sm:items-center">
+            <a
+              href={waLink()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-white text-black text-sm font-semibold hover:bg-white/90 transition-colors"
+            >
+              Konsultasi via WA
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+            </a>
+            <a
+              href="#harga"
+              onClick={scrollTo("harga")}
+              className="inline-flex items-center justify-center px-7 py-3.5 rounded-full border border-white/12 text-sm font-medium text-white/80 hover:text-white hover:border-white/25 hover:bg-white/[0.03] transition-colors"
+            >
+              Lihat harga
+            </a>
+          </div>
         </motion.div>
-      </motion.div>
-
-      {/* Decorative blurred blobs */}
-      <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-brand-primary rounded-full mix-blend-screen filter blur-[100px] opacity-20 animate-pulse-slow pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-72 h-72 bg-brand-secondary rounded-full mix-blend-screen filter blur-[100px] opacity-20 pointer-events-none" />
+      </div>
     </section>
   );
 }
