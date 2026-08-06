@@ -1,36 +1,54 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0f0c29;
+  --background: #0a0814;
   --foreground: #f8fafc;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  
+
   --color-brand-primary: #8a2be2;
   --color-brand-secondary: #ff007f;
   --color-brand-accent: #00ffff;
-  
-  --color-glass: rgba(255, 255, 255, 0.05);
-  --color-glass-hover: rgba(255, 255, 255, 0.1);
-  --color-glass-border: rgba(255, 255, 255, 0.1);
-  
+
+  --color-glass: rgba(255, 255, 255, 0.04);
+  --color-glass-hover: rgba(255, 255, 255, 0.08);
+  --color-glass-border: rgba(255, 255, 255, 0.08);
+
   --color-text-muted: #94a3b8;
-  
+
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-heading: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
-  
-  --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+
+  --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
 body {
   background-color: var(--background);
-  background-image: 
-    radial-gradient(circle at top right, rgba(138, 43, 226, 0.15), transparent 40%),
-    radial-gradient(circle at bottom left, rgba(255, 0, 127, 0.1), transparent 40%);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(138, 43, 226, 0.22), transparent 55%),
+    radial-gradient(ellipse 50% 40% at 100% 50%, rgba(255, 0, 127, 0.06), transparent 50%),
+    radial-gradient(ellipse 40% 30% at 0% 80%, rgba(0, 255, 255, 0.04), transparent 45%);
   background-attachment: fixed;
   color: var(--foreground);
   overflow-x: hidden;
+}
+
+/* Shared clean card surface */
+.ui-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.25rem;
+  backdrop-filter: blur(12px);
+}
+
+.ui-card-hover {
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+
+.ui-card-hover:hover {
+  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.05);
 }

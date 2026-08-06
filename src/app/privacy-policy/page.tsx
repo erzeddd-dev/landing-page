@@ -3,8 +3,8 @@ import { ArrowLeft } from 'lucide-react';
 import Footer from '@/components/Footer';
 
 export const metadata = {
-  title: 'Privacy Policy | Uji Data',
-  description: 'Kebijakan Privasi layanan Uji Data.',
+  title: 'Privacy Policy | OlahData',
+  description: 'Kebijakan Privasi layanan OlahData.',
 };
 
 export default function PrivacyPolicy() {

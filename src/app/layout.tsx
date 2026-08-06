@@ -15,29 +15,37 @@ const outfit = Outfit({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://olahdata.me"),
-  title: "Jasa Olah Data Penelitian",
-  description: "Terkendala Olah Data Penelitian? Biar kami yang urus datanya. Layanan olah data SPSS, EViews, Ekonometrika, Penyusunan Makalah, dan Parafrase.",
+  // Tab browser + fallback; Discord/X title utama = openGraph.title / twitter.title
+  title: {
+    default: "Nomor #1 di #zonauang",
+    template: "%s · OlahData",
+  },
+  description:
+    "Jasa olah data kuantitatif & ekonometrika. Paket Basic 250rb · Ngebut 450rb · Lulus Aman 750rb. SPSS, EViews, STATA, SmartPLS, parafrase, proofreading, jurnal.",
   openGraph: {
-    title: "Jasa Olah Data Penelitian",
-    description: "Terkendala Olah Data Penelitian? Biar kami yang urus datanya. Layanan olah data SPSS, EViews, Ekonometrika, Penyusunan Makalah, dan Parafrase.",
+    // Discord: baris biru (title) di embed
+    title: "Nomor #1 di #zonauang",
+    description:
+      "Basic 250rb · Ngebut 450rb · Lulus Aman 750rb. SPSS, EViews, STATA, SmartPLS · parafrase & jurnal.",
     url: "https://olahdata.me",
-    siteName: "Uji Data",
+    siteName: "OlahData",
     locale: "id_ID",
     type: "website",
     images: [
       {
-        url: "https://olahdata.me/og-image.png?v=20260804",
+        url: "https://olahdata.me/og-image.png?v=20260806d",
         width: 1200,
         height: 630,
-        alt: "Uji Data - Jasa Olah Data Penelitian",
+        alt: "OlahData price list: Basic 250rb, Ngebut 450rb, Lulus Aman 750rb",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Jasa Olah Data Penelitian",
-    description: "Layanan olah data SPSS, EViews, Ekonometrika, Penyusunan Makalah, dan Parafrase.",
-    images: ["https://olahdata.me/og-image.png?v=20260804"],
+    title: "Nomor #1 di #zonauang",
+    description:
+      "Basic 250rb · Ngebut 450rb · Lulus Aman 750rb. SPSS, EViews, STATA, SmartPLS · parafrase & jurnal.",
+    images: ["https://olahdata.me/og-image.png?v=20260806d"],
   },
 };
 

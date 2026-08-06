@@ -3,8 +3,8 @@ import { ArrowLeft } from 'lucide-react';
 import Footer from '@/components/Footer';
 
 export const metadata = {
-  title: 'Terms of Service | Uji Data',
-  description: 'Syarat dan Ketentuan layanan Uji Data.',
+  title: 'Terms of Service | OlahData',
+  description: 'Syarat dan Ketentuan layanan OlahData.',
 };
 
 export default function TermsOfService() {
@@ -26,7 +26,7 @@ export default function TermsOfService() {
             
             <section>
               <h2 className="text-xl font-semibold text-white mb-3">1. Layanan Kami</h2>
-              <p>Uji Data menyediakan layanan bimbingan akademik, konsultasi, dan bantuan pengolahan data untuk mahasiswa. Layanan kami ditujukan sebagai referensi, bahan pembelajaran, dan alat bantu akademik. Kami sangat menyarankan klien untuk tetap mempelajari hasil yang kami berikan.</p>
+              <p>OlahData menyediakan layanan bimbingan akademik, konsultasi, dan bantuan pengolahan data untuk mahasiswa. Layanan kami ditujukan sebagai referensi, bahan pembelajaran, dan alat bantu akademik. Kami sangat menyarankan klien untuk tetap mempelajari hasil yang kami berikan.</p>
             </section>
             
             <section>
