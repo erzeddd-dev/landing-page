@@ -4,15 +4,18 @@ import Link from "next/link";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 
 const NAV_LINKS = [
-  { href: "#harga", label: "Harga" },
-  { href: "#layanan", label: "Layanan" },
-  { href: "#faq", label: "FAQ" },
+  { href: "/pricelist", label: "Harga", isPage: true },
+  { href: "#layanan", label: "Layanan", isPage: false },
+  { href: "#faq", label: "FAQ", isPage: false },
 ];
 
 export default function Navbar() {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -39,10 +42,21 @@ export default function Navbar() {
 
   const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
-    href: string
+    href: string,
+    isPage: boolean
   ) => {
+    if (isPage) {
+      setIsOpen(false);
+      return; // let Link handle navigation
+    }
     e.preventDefault();
     setIsOpen(false);
+
+    if (!isHome) {
+      // If not on homepage, go home then scroll
+      window.location.href = `/${href}`;
+      return;
+    }
     setTimeout(() => scrollToSection(href), 120);
   };
 
@@ -68,16 +82,31 @@ export default function Navbar() {
         </Link>
 
         <nav className="hidden md:flex items-center gap-1">
-          {NAV_LINKS.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              onClick={(e) => handleNavClick(e, link.href)}
-              className="px-3.5 py-2 text-sm font-medium text-white/60 hover:text-white rounded-lg hover:bg-white/[0.04] transition-colors"
-            >
-              {link.label}
-            </a>
-          ))}
+          {NAV_LINKS.map((link) =>
+            link.isPage ? (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setIsOpen(false)}
+                className={`px-3.5 py-2 text-sm font-medium rounded-lg hover:bg-white/[0.04] transition-colors ${
+                  pathname === link.href
+                    ? "text-white"
+                    : "text-white/60 hover:text-white"
+                }`}
+              >
+                {link.label}
+              </Link>
+            ) : (
+              <a
+                key={link.href}
+                href={isHome ? link.href : `/${link.href}`}
+                onClick={(e) => handleNavClick(e, link.href, false)}
+                className="px-3.5 py-2 text-sm font-medium text-white/60 hover:text-white rounded-lg hover:bg-white/[0.04] transition-colors"
+              >
+                {link.label}
+              </a>
+            )
+          )}
         </nav>
 
         <a
@@ -110,16 +139,29 @@ export default function Navbar() {
             className="md:hidden overflow-hidden border-t border-white/[0.06] bg-[#0a0814]/95 backdrop-blur-xl"
           >
             <nav className="flex flex-col px-6 py-4 gap-1">
-              {NAV_LINKS.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={(e) => handleNavClick(e, link.href)}
-                  className="py-3 px-3 rounded-xl text-sm font-medium text-white/80 hover:bg-white/[0.05]"
-                >
-                  {link.label}
-                </a>
-              ))}
+              {NAV_LINKS.map((link) =>
+                link.isPage ? (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setIsOpen(false)}
+                    className={`py-3 px-3 rounded-xl text-sm font-medium hover:bg-white/[0.05] ${
+                      pathname === link.href ? "text-white" : "text-white/80"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                ) : (
+                  <a
+                    key={link.href}
+                    href={isHome ? link.href : `/${link.href}`}
+                    onClick={(e) => handleNavClick(e, link.href, false)}
+                    className="py-3 px-3 rounded-xl text-sm font-medium text-white/80 hover:bg-white/[0.05]"
+                  >
+                    {link.label}
+                  </a>
+                )
+              )}
               <a
                 href="https://wa.me/6285713071197?text=Halo%2C%20saya%20mau%20konsultasi%20jasa%20olah%20data"
                 target="_blank"
