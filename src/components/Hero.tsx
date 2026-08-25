@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
@@ -11,14 +12,6 @@ export default function Hero() {
       "Halo, saya ingin konsultasi layanan olah data penelitian. Boleh dibantu?"
     );
     return `https://wa.me/6285713071197?text=${text}`;
-  };
-
-  const scrollTo = (id: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    const el = document.getElementById(id);
-    if (!el) return;
-    const top = el.getBoundingClientRect().top + window.scrollY - 80;
-    window.scrollTo({ top, behavior: "smooth" });
   };
 
   return (
@@ -62,13 +55,12 @@ export default function Hero() {
               Konsultasi via WA
               <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </a>
-            <a
-              href="#harga"
-              onClick={scrollTo("harga")}
+            <Link
+              href="/pricelist"
               className="inline-flex items-center justify-center px-7 py-3.5 rounded-full border border-white/12 text-sm font-medium text-white/80 hover:text-white hover:border-white/25 hover:bg-white/[0.03] transition-colors"
             >
               Lihat harga
-            </a>
+            </Link>
           </div>
         </motion.div>
       </div>
