@@ -41,8 +41,8 @@ export default function Hero() {
           </h1>
 
           <p className="text-text-muted text-base md:text-lg max-w-xl mx-auto mb-9 leading-relaxed">
-            SPSS, EViews, STATA, SmartPLS. Plus parafrase, proofreading, dan
-            naskah jurnal. Mulai dari Rp 250rb.
+            SPSS, EViews, STATA, SmartPLS. Plus parafrase, naskah jurnal, dan
+            proposal skripsi–disertasi. Mulai dari Rp 250rb.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center items-stretch sm:items-center">

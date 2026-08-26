@@ -8,12 +8,12 @@ const FAQS = [
   {
     question: "Layanan ini mencakup apa saja?",
     answer:
-      "Fokus: olah data kuantitatif & ekonometrika (SPSS, EViews, STATA, SmartPLS/SEM). Pendukung: parafrase, proofreading, dan naskah jurnal. Detail cakupan disepakati setelah brief (data, model, deadline).",
+      "Fokus: olah data kuantitatif & ekonometrika (SPSS, EViews, STATA, SmartPLS/SEM). Pendukung: parafrase, proofreading, naskah jurnal, plus proposal skripsi, tesis, dan disertasi. Detail cakupan disepakati setelah brief (data, model, deadline).",
   },
   {
     question: "Berapa lama pengerjaan?",
     answer:
-      "Basic sekitar 5-7 hari kerja, Ngebut 1-3 hari kerja, tergantung antrean dan kompleksitas. Estimasi final dikonfirmasi sebelum mulai.",
+      "Olah data: Basic 5–7 hari kerja, Ngebut 1–3 hari kerja. Proposal skripsi 5–7 hari, tesis 7–10 hari, disertasi 10–14 hari. Estimasi final dikonfirmasi sebelum mulai.",
   },
   {
     question: "Bagaimana sistem revisi?",
