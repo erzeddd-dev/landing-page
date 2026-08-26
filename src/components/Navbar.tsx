@@ -5,7 +5,13 @@ import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
+
+const PROPOSAL_LINKS = [
+  { href: "/pricelist#proposal-skripsi", label: "Proposal Skripsi" },
+  { href: "/pricelist#proposal-tesis", label: "Proposal Tesis" },
+  { href: "/pricelist#proposal-disertasi", label: "Proposal Disertasi" },
+];
 
 const NAV_LINKS = [
   { href: "/pricelist", label: "Harga", isPage: true },
@@ -18,6 +24,8 @@ export default function Navbar() {
   const isHome = pathname === "/";
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [proposalOpen, setProposalOpen] = useState(false);
+  const proposalActive = pathname === "/pricelist";
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 12);
@@ -47,13 +55,12 @@ export default function Navbar() {
   ) => {
     if (isPage) {
       setIsOpen(false);
-      return; // let Link handle navigation
+      return;
     }
     e.preventDefault();
     setIsOpen(false);
 
     if (!isHome) {
-      // If not on homepage, go home then scroll
       window.location.href = `/${href}`;
       return;
     }
@@ -107,6 +114,49 @@ export default function Navbar() {
               </a>
             )
           )}
+
+          <div
+            className="relative"
+            onMouseEnter={() => setProposalOpen(true)}
+            onMouseLeave={() => setProposalOpen(false)}
+          >
+            <Link
+              href="/pricelist#proposal"
+              className={`inline-flex items-center gap-1 px-3.5 py-2 text-sm font-medium rounded-lg hover:bg-white/[0.04] transition-colors ${
+                proposalActive ? "text-white" : "text-white/60 hover:text-white"
+              }`}
+            >
+              Proposal
+              <ChevronDown
+                className={`w-3.5 h-3.5 transition-transform ${
+                  proposalOpen ? "rotate-180" : ""
+                }`}
+              />
+            </Link>
+            <AnimatePresence>
+              {proposalOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 6 }}
+                  transition={{ duration: 0.15 }}
+                  className="absolute left-0 top-full pt-2"
+                >
+                  <div className="min-w-[220px] rounded-xl border border-white/[0.08] bg-[#0f0c1c]/95 backdrop-blur-xl p-1.5 shadow-xl">
+                    {PROPOSAL_LINKS.map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className="block px-3 py-2.5 rounded-lg text-sm text-white/70 hover:text-white hover:bg-white/[0.06] transition-colors"
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         </nav>
 
         <a
@@ -162,6 +212,19 @@ export default function Navbar() {
                   </a>
                 )
               )}
+              <p className="px-3 pt-3 pb-1 text-[11px] uppercase tracking-widest text-white/35 font-semibold">
+                Proposal
+              </p>
+              {PROPOSAL_LINKS.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setIsOpen(false)}
+                  className="py-3 px-3 rounded-xl text-sm font-medium text-white/80 hover:bg-white/[0.05]"
+                >
+                  {item.label}
+                </Link>
+              ))}
               <a
                 href="https://wa.me/6285713071197?text=Halo%2C%20saya%20mau%20konsultasi%20jasa%20olah%20data"
                 target="_blank"
