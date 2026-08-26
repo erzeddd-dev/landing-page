@@ -8,6 +8,9 @@ import {
   FileText,
   SpellCheck,
   BookOpen,
+  GraduationCap,
+  ScrollText,
+  Landmark,
 } from "lucide-react";
 
 const services = [
@@ -59,6 +62,30 @@ const services = [
     accent: "text-cyan-300",
     ring: "from-cyan-500/20 to-brand-accent/10",
   },
+  {
+    title: "Proposal Skripsi",
+    description:
+      "Bab 1–3 S1 sesuai pedoman kampus: latar belakang, rumusan masalah, tujuan, dan metode.",
+    icon: GraduationCap,
+    accent: "text-rose-400",
+    ring: "from-rose-500/20 to-pink-500/10",
+  },
+  {
+    title: "Proposal Tesis",
+    description:
+      "Proposal S2 lebih dalam: gap research, kajian teori, dan desain metode yang rapi.",
+    icon: ScrollText,
+    accent: "text-indigo-300",
+    ring: "from-indigo-500/20 to-blue-500/10",
+  },
+  {
+    title: "Proposal Disertasi",
+    description:
+      "Kerangka proposal S3: novelty, state of the art, dan struktur sesuai brief pembimbing.",
+    icon: Landmark,
+    accent: "text-teal-300",
+    ring: "from-teal-500/20 to-emerald-500/10",
+  },
 ];
 
 export default function ServiceCatalog() {
@@ -70,7 +97,7 @@ export default function ServiceCatalog() {
             Layanan
           </h2>
           <p className="text-text-muted text-sm md:text-base">
-            Inti di kuantitatif &amp; ekonometrika. Ditambah dukungan naskah.
+            Inti di kuantitatif &amp; ekonometrika. Ditambah naskah dan proposal.
           </p>
         </div>
 
