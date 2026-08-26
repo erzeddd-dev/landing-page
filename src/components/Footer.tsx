@@ -41,9 +41,9 @@ export default function Footer() {
               OlahData
             </h3>
             <p className="text-gray-400 max-w-sm mb-6 leading-relaxed text-sm">
-              Bantuan olah data penelitian (kuantitatif &amp; ekonometrika),
-              plus parafrase, proofreading, dan naskah jurnal. Transparan,
-              terukur, dan siap dibahas.
+              Bantuan olah data penelitian (kuantitatif & ekonometrika),
+              plus parafrase, naskah jurnal, dan proposal skripsi–disertasi.
+              Transparan, terukur, dan siap dibahas.
             </p>
             <div className="flex gap-3">
               <a
@@ -82,7 +82,7 @@ export default function Footer() {
                   href="#layanan"
                   className="text-gray-400 hover:text-brand-accent transition-colors inline-flex items-center gap-1"
                 >
-                  SPSS &amp; kuantitatif <ArrowUpRight className="w-3 h-3" />
+                  SPSS & kuantitatif <ArrowUpRight className="w-3 h-3" />
                 </a>
               </li>
               <li>
@@ -103,10 +103,18 @@ export default function Footer() {
               </li>
               <li>
                 <a
+                  href="/pricelist#proposal"
+                  className="text-gray-400 hover:text-brand-accent transition-colors inline-flex items-center gap-1"
+                >
+                  Proposal skripsi–disertasi <ArrowUpRight className="w-3 h-3" />
+                </a>
+              </li>
+              <li>
+                <a
                   href="#harga"
                   className="text-gray-400 hover:text-brand-accent transition-colors inline-flex items-center gap-1"
                 >
-                  Paket &amp; harga <ArrowUpRight className="w-3 h-3" />
+                  Paket & harga <ArrowUpRight className="w-3 h-3" />
                 </a>
               </li>
             </ul>
