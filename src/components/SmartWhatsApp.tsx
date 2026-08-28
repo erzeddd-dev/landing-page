@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { MessageCircle } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa6";
 import { useEffect, useState } from "react";
 
 export default function SmartWhatsApp() {
@@ -33,7 +33,7 @@ export default function SmartWhatsApp() {
       style={{ pointerEvents: visible ? "auto" : "none" }}
       aria-label="Chat WhatsApp"
     >
-      <MessageCircle className="w-6 h-6" />
+      <FaWhatsapp className="w-7 h-7" />
     </motion.a>
   );
 }

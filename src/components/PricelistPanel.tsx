@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { MessageCircle } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa6";
 import { useCategoryTab } from "@/context/CategoryTabContext";
 
 const WA_BASE = "https://wa.me/6285713071197?text=";
@@ -59,7 +59,7 @@ export default function PricelistPanel() {
                   className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-[#25D366]/15 text-[#25D366] border border-[#25D366]/20 hover:bg-[#25D366]/25 transition-colors"
                   aria-label={`Tanya ${item.name} via WhatsApp`}
                 >
-                  <MessageCircle className="w-4 h-4" />
+                  <FaWhatsapp className="w-4 h-4" />
                 </a>
               </div>
             </div>
