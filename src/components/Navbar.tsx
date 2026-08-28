@@ -2,242 +2,41 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { ChevronDown, Menu, X } from "lucide-react";
-
-const PROPOSAL_LINKS = [
-  { href: "/pricelist#proposal-skripsi", label: "Proposal Skripsi" },
-  { href: "/pricelist#proposal-tesis", label: "Proposal Tesis" },
-  { href: "/pricelist#proposal-disertasi", label: "Proposal Disertasi" },
-];
-
-const NAV_LINKS = [
-  { href: "/pricelist", label: "Harga", isPage: true },
-  { href: "#layanan", label: "Layanan", isPage: false },
-  { href: "#faq", label: "FAQ", isPage: false },
-];
+import CategoryTabs from "@/components/CategoryTabs";
 
 export default function Navbar() {
   const pathname = usePathname();
   const isHome = pathname === "/";
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
-  const [proposalOpen, setProposalOpen] = useState(false);
-  const proposalActive = pathname === "/pricelist";
-
-  useEffect(() => {
-    const onScroll = () => setIsScrolled(window.scrollY > 12);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  useEffect(() => {
-    document.body.style.overflow = isOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isOpen]);
-
-  const scrollToSection = (href: string) => {
-    const id = href.replace("#", "");
-    const el = document.getElementById(id);
-    if (!el) return;
-    const top = el.getBoundingClientRect().top + window.scrollY - 80;
-    window.scrollTo({ top, behavior: "smooth" });
-  };
-
-  const handleNavClick = (
-    e: React.MouseEvent<HTMLAnchorElement>,
-    href: string,
-    isPage: boolean
-  ) => {
-    if (isPage) {
-      setIsOpen(false);
-      return;
-    }
-    e.preventDefault();
-    setIsOpen(false);
-
-    if (!isHome) {
-      window.location.href = `/${href}`;
-      return;
-    }
-    setTimeout(() => scrollToSection(href), 120);
-  };
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled || isOpen
-          ? "bg-[#0a0814]/80 backdrop-blur-xl border-b border-white/[0.06] py-3"
-          : "bg-transparent py-4"
-      }`}
-    >
-      <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
-        <Link href="/" onClick={() => setIsOpen(false)} className="relative z-10">
-          <div className="relative h-9 w-40 sm:h-10 sm:w-48">
-            <Image
-              src="/logo.svg"
-              alt="OlahData"
-              fill
-              className="object-contain object-left"
-              priority
-            />
-          </div>
+    <header className="fixed top-0 left-0 right-0 z-50 bg-[#0a0814]/90 backdrop-blur-sm border-b border-white/[0.06]">
+      <div className="max-w-2xl mx-auto px-6 py-3 flex items-center justify-between gap-4">
+        <Link href="/" className="relative h-8 w-36 shrink-0">
+          <Image
+            src="/logo.svg"
+            alt="OlahData"
+            fill
+            className="object-contain object-left"
+            priority
+          />
         </Link>
-
-        <nav className="hidden md:flex items-center gap-1">
-          {NAV_LINKS.map((link) =>
-            link.isPage ? (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setIsOpen(false)}
-                className={`px-3.5 py-2 text-sm font-medium rounded-lg hover:bg-white/[0.04] transition-colors ${
-                  pathname === link.href
-                    ? "text-white"
-                    : "text-white/60 hover:text-white"
-                }`}
-              >
-                {link.label}
-              </Link>
-            ) : (
-              <a
-                key={link.href}
-                href={isHome ? link.href : `/${link.href}`}
-                onClick={(e) => handleNavClick(e, link.href, false)}
-                className="px-3.5 py-2 text-sm font-medium text-white/60 hover:text-white rounded-lg hover:bg-white/[0.04] transition-colors"
-              >
-                {link.label}
-              </a>
-            )
-          )}
-
-          <div
-            className="relative"
-            onMouseEnter={() => setProposalOpen(true)}
-            onMouseLeave={() => setProposalOpen(false)}
-          >
-            <Link
-              href="/pricelist#proposal"
-              className={`inline-flex items-center gap-1 px-3.5 py-2 text-sm font-medium rounded-lg hover:bg-white/[0.04] transition-colors ${
-                proposalActive ? "text-white" : "text-white/60 hover:text-white"
-              }`}
-            >
-              Proposal
-              <ChevronDown
-                className={`w-3.5 h-3.5 transition-transform ${
-                  proposalOpen ? "rotate-180" : ""
-                }`}
-              />
-            </Link>
-            <AnimatePresence>
-              {proposalOpen && (
-                <motion.div
-                  initial={{ opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 6 }}
-                  transition={{ duration: 0.15 }}
-                  className="absolute left-0 top-full pt-2"
-                >
-                  <div className="min-w-[220px] rounded-xl border border-white/[0.08] bg-[#0f0c1c]/95 backdrop-blur-xl p-1.5 shadow-xl">
-                    {PROPOSAL_LINKS.map((item) => (
-                      <Link
-                        key={item.href}
-                        href={item.href}
-                        className="block px-3 py-2.5 rounded-lg text-sm text-white/70 hover:text-white hover:bg-white/[0.06] transition-colors"
-                      >
-                        {item.label}
-                      </Link>
-                    ))}
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-        </nav>
 
         <a
           href="https://wa.me/6285713071197?text=Halo%2C%20saya%20mau%20konsultasi%20jasa%20olah%20data"
           target="_blank"
           rel="noopener noreferrer"
-          className="hidden md:inline-flex px-4 py-2 rounded-full bg-white text-black text-sm font-semibold hover:bg-white/90 transition-colors"
+          className="inline-flex px-4 py-1.5 rounded-full bg-white text-black text-sm font-semibold hover:bg-white/90 transition-colors shrink-0"
         >
           Konsultasi WA
         </a>
-
-        <button
-          type="button"
-          onClick={() => setIsOpen((p) => !p)}
-          className="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-full border border-white/10 bg-white/[0.04] text-white"
-          aria-label={isOpen ? "Tutup menu" : "Buka menu"}
-          aria-expanded={isOpen}
-        >
-          {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-        </button>
       </div>
 
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.2 }}
-            className="md:hidden overflow-hidden border-t border-white/[0.06] bg-[#0a0814]/95 backdrop-blur-xl"
-          >
-            <nav className="flex flex-col px-6 py-4 gap-1">
-              {NAV_LINKS.map((link) =>
-                link.isPage ? (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setIsOpen(false)}
-                    className={`py-3 px-3 rounded-xl text-sm font-medium hover:bg-white/[0.05] ${
-                      pathname === link.href ? "text-white" : "text-white/80"
-                    }`}
-                  >
-                    {link.label}
-                  </Link>
-                ) : (
-                  <a
-                    key={link.href}
-                    href={isHome ? link.href : `/${link.href}`}
-                    onClick={(e) => handleNavClick(e, link.href, false)}
-                    className="py-3 px-3 rounded-xl text-sm font-medium text-white/80 hover:bg-white/[0.05]"
-                  >
-                    {link.label}
-                  </a>
-                )
-              )}
-              <p className="px-3 pt-3 pb-1 text-[11px] uppercase tracking-widest text-white/35 font-semibold">
-                Proposal
-              </p>
-              {PROPOSAL_LINKS.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setIsOpen(false)}
-                  className="py-3 px-3 rounded-xl text-sm font-medium text-white/80 hover:bg-white/[0.05]"
-                >
-                  {item.label}
-                </Link>
-              ))}
-              <a
-                href="https://wa.me/6285713071197?text=Halo%2C%20saya%20mau%20konsultasi%20jasa%20olah%20data"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setIsOpen(false)}
-                className="mt-2 py-3 rounded-full text-center text-sm font-semibold bg-white text-black"
-              >
-                Konsultasi WA
-              </a>
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {isHome && (
+        <div className="max-w-2xl mx-auto px-4 pb-3">
+          <CategoryTabs />
+        </div>
+      )}
     </header>
   );
 }

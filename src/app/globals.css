@@ -27,11 +27,6 @@
 
 body {
   background-color: var(--background);
-  background-image:
-    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(138, 43, 226, 0.22), transparent 55%),
-    radial-gradient(ellipse 50% 40% at 100% 50%, rgba(255, 0, 127, 0.06), transparent 50%),
-    radial-gradient(ellipse 40% 30% at 0% 80%, rgba(0, 255, 255, 0.04), transparent 45%);
-  background-attachment: fixed;
   color: var(--foreground);
   overflow-x: hidden;
 }
@@ -41,14 +36,22 @@ body {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 1.25rem;
-  backdrop-filter: blur(12px);
 }
 
 .ui-card-hover {
-  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+  transition: border-color 0.2s ease, background 0.2s ease;
 }
 
 .ui-card-hover:hover {
   border-color: rgba(255, 255, 255, 0.14);
   background: rgba(255, 255, 255, 0.05);
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }

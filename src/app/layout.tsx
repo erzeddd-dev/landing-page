@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
 import Navbar from "@/components/Navbar";
+import { CategoryTabProvider } from "@/context/CategoryTabContext";
 import "./globals.css";
 
 const inter = Inter({
@@ -60,8 +61,10 @@ export default function RootLayout({
       className={`${inter.variable} ${outfit.variable} scroll-smooth`}
     >
       <body className="font-sans antialiased min-h-screen selection:bg-brand-primary selection:text-white">
-        <Navbar />
-        {children}
+        <CategoryTabProvider>
+          <Navbar />
+          {children}
+        </CategoryTabProvider>
       </body>
     </html>
   );

@@ -1,23 +1,15 @@
-import Hero from "@/components/Hero";
-import TrustBadges from "@/components/TrustBadges";
-import ServiceCatalog from "@/components/ServiceCatalog";
-import PricingTier from "@/components/PricingTier";
-import SmartWhatsApp from "@/components/SmartWhatsApp";
-import Testimonials from "@/components/Testimonials";
-import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
+import SmartWhatsApp from "@/components/SmartWhatsApp";
+import PricelistPanel from "@/components/PricelistPanel";
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen overflow-x-hidden">
-      <Hero />
-      <PricingTier />
-      <TrustBadges />
-      <ServiceCatalog />
-      <Testimonials />
-      <FAQ />
-      <SmartWhatsApp />
+    <main className="min-h-screen flex flex-col pt-32">
+      <div className="max-w-2xl mx-auto px-6 pb-16 w-full flex-grow">
+        <PricelistPanel />
+      </div>
       <Footer />
+      <SmartWhatsApp />
     </main>
   );
 }

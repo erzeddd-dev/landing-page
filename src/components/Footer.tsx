@@ -1,4 +1,9 @@
+"use client";
+
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Mail, ArrowUpRight } from "lucide-react";
+import { useCategoryTab } from "@/context/CategoryTabContext";
 
 const YoutubeIcon = ({ className }: { className?: string }) => (
   <svg
@@ -30,14 +35,23 @@ const TiktokIcon = ({ className }: { className?: string }) => (
 );
 
 export default function Footer() {
-  return (
-    <footer className="bg-black/50 border-t border-white/10 pt-14 pb-8 relative overflow-hidden">
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-[300px] bg-brand-primary/5 blur-[150px] -z-10 pointer-events-none" />
+  const router = useRouter();
+  const { categories, setActiveIndex } = useCategoryTab();
 
+  const goToTab = (id: string) => {
+    const index = categories.findIndex((c) => c.id === id);
+    if (index < 0) return;
+    setActiveIndex(index);
+    router.push(`/?tab=${id}`);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  return (
+    <footer className="bg-black/50 border-t border-white/10 pt-14 pb-8">
       <div className="container mx-auto px-6 max-w-7xl">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
           <div className="md:col-span-2">
-            <h3 className="text-2xl font-heading font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent mb-3">
+            <h3 className="text-2xl font-heading font-bold text-white mb-3">
               OlahData
             </h3>
             <p className="text-gray-400 max-w-sm mb-6 leading-relaxed text-sm">
@@ -78,44 +92,49 @@ export default function Footer() {
             <h4 className="font-semibold text-base mb-4 text-white">Layanan</h4>
             <ul className="space-y-2.5 text-sm">
               <li>
-                <a
-                  href="#layanan"
+                <button
+                  type="button"
+                  onClick={() => goToTab("skripsi")}
                   className="text-gray-400 hover:text-brand-accent transition-colors inline-flex items-center gap-1"
                 >
-                  SPSS & kuantitatif <ArrowUpRight className="w-3 h-3" />
-                </a>
+                  Skripsi <ArrowUpRight className="w-3 h-3" />
+                </button>
               </li>
               <li>
-                <a
-                  href="#layanan"
+                <button
+                  type="button"
+                  onClick={() => goToTab("tesis")}
                   className="text-gray-400 hover:text-brand-accent transition-colors inline-flex items-center gap-1"
                 >
-                  Ekonometrika <ArrowUpRight className="w-3 h-3" />
-                </a>
+                  Tesis <ArrowUpRight className="w-3 h-3" />
+                </button>
               </li>
               <li>
-                <a
-                  href="#layanan"
+                <button
+                  type="button"
+                  onClick={() => goToTab("disertasi")}
                   className="text-gray-400 hover:text-brand-accent transition-colors inline-flex items-center gap-1"
                 >
-                  SmartPLS / SEM <ArrowUpRight className="w-3 h-3" />
-                </a>
+                  Disertasi <ArrowUpRight className="w-3 h-3" />
+                </button>
               </li>
               <li>
-                <a
-                  href="/pricelist#proposal"
+                <button
+                  type="button"
+                  onClick={() => goToTab("jurnal")}
                   className="text-gray-400 hover:text-brand-accent transition-colors inline-flex items-center gap-1"
                 >
-                  Proposal skripsi–disertasi <ArrowUpRight className="w-3 h-3" />
-                </a>
+                  Jurnal <ArrowUpRight className="w-3 h-3" />
+                </button>
               </li>
               <li>
-                <a
-                  href="#harga"
+                <button
+                  type="button"
+                  onClick={() => goToTab("lainnya")}
                   className="text-gray-400 hover:text-brand-accent transition-colors inline-flex items-center gap-1"
                 >
-                  Paket & harga <ArrowUpRight className="w-3 h-3" />
-                </a>
+                  Website & lainnya <ArrowUpRight className="w-3 h-3" />
+                </button>
               </li>
             </ul>
           </div>
@@ -157,18 +176,18 @@ export default function Footer() {
             © {new Date().getFullYear()} OlahData · olahdata.me
           </p>
           <div className="flex gap-6 text-sm">
-            <a
+            <Link
               href="/privacy-policy"
               className="text-gray-500 hover:text-white transition-colors"
             >
               Privacy Policy
-            </a>
-            <a
+            </Link>
+            <Link
               href="/terms-of-service"
               className="text-gray-500 hover:text-white transition-colors"
             >
               Terms of Service
-            </a>
+            </Link>
           </div>
         </div>
       </div>

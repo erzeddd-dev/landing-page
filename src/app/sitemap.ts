@@ -9,12 +9,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
-      url: 'https://olahdata.me/pricelist',
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
       url: 'https://olahdata.me/privacy-policy',
       lastModified: new Date(),
       changeFrequency: 'monthly',
